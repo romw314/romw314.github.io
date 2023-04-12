@@ -1,0 +1,22 @@
+::selection {
+	background-color: black;
+	color: white;
+}
+
+#circle {
+	color: inherit;
+	text-decoration: inherit;
+	font-size: 10em;
+}
+
+#circle:link::after {
+	content: "\1F534";
+}
+
+#circle:visited::after {
+	content: "\1F"
+}
+
+#circle:hover::after {
+	content: "\1F7E2"
+}

@@ -3,11 +3,17 @@
 	color: black;
 }
 
+@font-face {
+	font-family: ibmBios;
+	src: url(https://supergames.vercel.app/font.woff);
+}
+
 a {
 	color: red;
 }
 
 div.container {
+	font-family: ibmBios;
 	top: 20%;
 	left: 50%;
 	transform: translate(-50%, -50%);

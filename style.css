@@ -7,9 +7,16 @@ a {
 	color: red;
 }
 
-body>div.container {
+div.container {
+	text-align: center;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
+}
+div.container>ul {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: relative;
 }

@@ -3,6 +3,12 @@
 	color: black;
 }
 
+body {
+	font-family: "Courier New";
+	background-color: black;
+	color: lightgreen;
+}
+
 @font-face {
 	font-family: ibmBios;
 	src: url(https://supergames.vercel.app/font.woff);

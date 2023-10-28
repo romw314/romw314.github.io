@@ -5,8 +5,23 @@
 		<!-- Cloudflare Web Analytics -->
 		<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f20adfe778d54a74a5cdf03903db20dd"}'></script>
 		<!-- End Cloudflare Web Analytics -->
+		<!-- SweetAlert2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js" integrity="sha256-LkC+rZzbNkEleBllGdKANe5nxH0QnRjn4hbw2lW+Hjo=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
+		<!-- End SweetAlert2 -->
+		<!-- Site news -->
+		<script>
+			window._romw314_news = [
+				['fire', 'GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!', '<a href="https://greenacidpipe.vercel.app">Learn More</a>']
+			];
+		</script>
+		<!-- End Site news -->
 		<script>
 			window.addEventListener('load', () => document.documentElement.requestFullscreen());
+			window.addEventListener('load', async () => {
+				for (const n of window._romw314_news)
+					await Swal[n[0]](n.slice(1));
+			});
 		</script>
 	</head>
 	<body>
@@ -17,6 +32,7 @@
 					<ul>
 						<li>My projects<ul>
 							<li><a href="/games">romw314games</a></li>
+							<li><a href="https://greenacidpipe.vercel.app">GreenAcidPipe/RedGas</a></li>
 						</ul></li>
 						<li>I collaborated on<ul>
 							<li>Pay and Wash (coming soon)</li>

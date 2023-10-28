@@ -12,7 +12,7 @@
 		<!-- Site news -->
 		<script>
 			window._romw314_news = [
-				['fire', 'GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!', '<a href="https://greenacidpipe.vercel.app">Learn More</a>']
+				['fire', 'GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!', '<a href="https://greenacidpipe.vercel.app">Learn More</a>', 'info']
 			];
 		</script>
 		<!-- End Site news -->
@@ -20,7 +20,7 @@
 			window.addEventListener('load', () => document.documentElement.requestFullscreen());
 			window.addEventListener('load', async () => {
 				for (const n of window._romw314_news)
-					await Swal[n[0]](n.slice(1));
+					await Swal[n[0]](...n.slice(1));
 			});
 		</script>
 	</head>

@@ -12,11 +12,12 @@
 		<!-- Site news -->
 		<script>
 			window._romw314_news = [
-				['fire', {
+				[false, 'fire', {
 					title: 'RedGas - create websites without coding',
 					html: '<p>GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!</p><p><a href="https://greenacidpipe.vercel.app" target="_blank">Learn More</a></p>',
 					icon: 'info',
-					width: '64em'
+					width: '64em',
+					enabled: false
 				}]
 			];
 		</script>
@@ -25,7 +26,8 @@
 			window.addEventListener('load', () => document.documentElement.requestFullscreen());
 			window.addEventListener('load', async () => {
 				for (const n of window._romw314_news)
-					await Swal[n[0]](...n.slice(1));
+					if (n[0])
+						await Swal[n[1]](...n.slice(2));
 			});
 		</script>
 	</head>

@@ -30,7 +30,7 @@
 			window.addEventListener('load', () => document.documentElement.requestFullscreen());
 			window.addEventListener('load', async () => {
 				for (const n of window._romw314_news)
-					if (n[0])
+					if (n[0] === true)
 						await Swal[n[1]](...n.slice(2));
 			});
 		</script>

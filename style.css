@@ -9,17 +9,17 @@ body {
 	color: lightgreen;
 }
 
-/* @font-face {
-	font-family: ibmBios;
-	src: url(https://supergames.vercel.app/font.woff);
-} */
+@font-face {
+	font-family: brick22;
+	src: url(font.woff);
+}
 
 a {
 	color: red;
 }
 
 div.container {
-	font-family: "Courier New" serif;
+	font-family: "Courier New" brick22 serif;
 	top: 20%;
 	left: 50%;
 	transform: translate(-50%, -50%);

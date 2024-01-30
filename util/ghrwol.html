@@ -19,6 +19,8 @@
 				const reposWithoutLicense = data.filter((repo) => !repo.license);
 				if (reposWithoutLicense.length > 0)
 					document.getElementById('result').innerHTML = reposWithoutLicense.map((repo) => `<li><a href="${repo.url}">${repo.full_name}</a></li>`).join("");
+				else
+					document.body.removeChild(document.getElementById('result'));
 			});
 		</script>
 	</body>

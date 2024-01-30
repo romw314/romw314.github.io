@@ -10,7 +10,7 @@
 			<input type="submit" />
 		</form>
 		<ul id="result">
-			<li><em>No public repos without a license. Great!</em></li>
+			<li><em>Loading...</em></li>
 		</ul>
 		<script type="module">
 			import { Octokit } from "https://esm.sh/@octokit/rest";
@@ -19,8 +19,9 @@
 			if (username)
 				octokit.repos.listForUser({ username, visibility: "public" }).then(({ data }) => {
 					const reposWithoutLicense = data.filter((repo) => !repo.license);
-					if (reposWithoutLicense.length > 0)
-						document.getElementById('result').innerHTML = reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a></li>`).join("");
+					document.getElementById('result').innerHTML = (reposWithoutLicense.length > 0) ?
+						reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a></li>`).join("") :
+						'<li><em>No public repos without a license. Great!</em></li>';
 				});
 			else
 				document.body.removeChild(document.getElementById('result'));

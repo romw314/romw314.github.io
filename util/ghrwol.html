@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>GhRWoL - romw314</title>
+	</head>
+	<body>
+		<h1>GhRWoL - license your repos</h1>
+		<p>GhRWoL helps you find public GitHub repos that don't have a license yet. This tool helps you to license your projects.</p>
+		<form action="#" method="GET">
+			<label for="username">Username:</label><input type="text" id="username" name="username" />
+			<input type="submit" />
+		</form>
+		<ul id="result">
+			<li><em>No public repos without a license. Great!</em></li>
+		</ul>
+		<script type="module">
+			const { Octokit } = require("@octokit/rest");
+			const octokit = new Octokit();
+			octokit.repos.listForUser({ username: new URLSearchParams(window.location.search).get('username') ?? octocat, visibility: "public" }).then(({ data }) => {
+				const reposWithoutLicense = data.filter((repo) => !repo.license);
+				if (reposWithoutLicense.length > 0)
+					document.getElementById('result').innerHTML = reposWithoutLicense.map((repo) => `<li><a href="${repo.url}">${repo.owner}/${repo.name}</a></li>`).join("");
+			});
+		</script>
+	</body>
+</html>

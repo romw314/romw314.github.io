@@ -15,13 +15,15 @@
 		<script type="module">
 			import { Octokit } from "https://esm.sh/@octokit/rest";
 			const octokit = new Octokit();
-			octokit.repos.listForUser({ username: new URLSearchParams(window.location.search).get('username') ?? octocat, visibility: "public" }).then(({ data }) => {
-				const reposWithoutLicense = data.filter((repo) => !repo.license);
-				if (reposWithoutLicense.length > 0)
-					document.getElementById('result').innerHTML = reposWithoutLicense.map((repo) => `<li><a href="${repo.url}">${repo.full_name}</a></li>`).join("");
-				else
-					document.body.removeChild(document.getElementById('result'));
-			});
+			const username = new URLSearchParams(window.location.search).get('username');
+			if (username)
+				octokit.repos.listForUser({ username, visibility: "public" }).then(({ data }) => {
+					const reposWithoutLicense = data.filter((repo) => !repo.license);
+					if (reposWithoutLicense.length > 0)
+						document.getElementById('result').innerHTML = reposWithoutLicense.map((repo) => `<li><a href="${repo.url}">${repo.full_name}</a></li>`).join("");
+				});
+			else
+				document.body.removeChild(document.getElementById('result'));
 		</script>
 	</body>
 </html>

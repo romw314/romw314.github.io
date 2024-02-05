@@ -16,14 +16,15 @@
 				visibility: hidden;
 			}
 		</style>
+		<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" integrity="sha256-Rdw90D3AegZwWiwpibjH9wkBPwS9U4bjJ51ORH8H69c=" crossorigin="anonymous"></script>
 		<script>
 			function genColorRadio(colorname) {
 				return `<li><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
 			}
-			document.addEventListener('DOMContentLoaded', () => {
+			document.addEventListener('DOMContentLoaded', async () => {
 				const acr = document.getElementById('act_color_radio');
-				const acrObj = [...acr.childNodes].filter(node => node.tagName === 'SPAN').map(node => node.innerText);
-				acr.innerHTML = acrObj.map(genColorRadio).join('');
+				const conf = jsyaml.load(await fetch('/data/mcsb.yaml').then(res => res.text()));
+				acr.innerHTML = conf.colors.map(genColorRadio).join('');
 			});
 
 			function getRawResult(search) {
@@ -47,12 +48,6 @@
 		<form method="GET" action="#">
 			<ul class="radio" id="act_color_radio">
 				<p>Loading...</p>
-				<span>lightgreen</span>
-				<span>lightblue</span>
-				<span>lightsalmon</span>
-				<span>beige</span>
-				<span>cornsilk</span>
-				<span>lavender</span>
 			</ul>
 			<input type="submit" />
 		</form>

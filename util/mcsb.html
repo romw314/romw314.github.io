@@ -9,13 +9,56 @@
 				padding: 2px;
 				font-size: 105%;
 			}
+			ul.radio {
+				list-style-type: none;
+			}
+			ul.radio > li {
+				visibility: hidden;
+			}
 		</style>
+		<script>
+			function genColorRadio(colorname) {
+				return `<li><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
+			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const acr = document.getElementById('act_color_radio');
+				const acrObj = [...acr.childNodes].filter(node => node.tagName === 'LI').map(node => node.innerText);
+				acr.innerHTML = acrObj.map(genColorRadio).join('');
+			});
+
+			function getRawResult(search) {
+				if (!search.has('color'))
+					return 'Sorry, but we can\'t find your color. Try choosing the color above and clicking SUBMIT.';
+				return `\
+<!-- Start romw314 MCSb block
+     https://romw314.github.io/util/mcsb.html -->
+<p style="background-color: lightgreen; border: 3px solid black; border-radius: 5px; color: #220022; padding: 5px;"><strong><a onmouseenter="window._romw314mscbtext=this.innerHTML;this.innerHTML=window._romw314mscbtext+' [<a href="https://romw314.github.io">romw314</a>]';" onmouseleave="this.innerHTML=window._romw314mcsbtext;" style="text-decoration: inherit; color: inherit;" href="${search.href}">${search.text}</a></strong></p>
+<!-- End romw314 MCSb block -->`;
+			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const resultNode = document.getElementById('result');
+				resultNode.innerText = getRawResult(new URLSearchParams(window.location.search));
+			});
+		</script>
 	</head>
 	<body>
 		<h1><span style="text-decoration:underline;text-decoration-style:dotted;text-decoration-color:lightgray;" onmouseenter="this.innerText='My Colored Start button';" onmouseleave="this.innerText='MCSb'">MCSb</span> - Create your own start buttons</h1>
+		<h2>Choose your color</h2>
 		<form method="GET" action="#">
-			<input type="radio" id="color_lightgreen" name="color" /><label for="color_lightgreen"><code>lightgreen</code></label>
+			<ul class="radio" id="act_color_radio">
+				<p>Loading...</p>
+				<li>lightgreen</li>
+				<li>lightblue</li>
+				<li>lightsalmon</li>
+				<li>beige</li>
+				<li>cornsilk</li>
+				<li>lavender</li>
+			</ul>
 			<input type="submit" />
 		</form>
+		<h2>Get the result...</h2>
+		<pre><code id="result">
+			Please wait...
+		</code></pre>
 	</body>
 </html>

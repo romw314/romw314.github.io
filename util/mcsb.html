@@ -12,17 +12,17 @@
 			ul.radio {
 				list-style-type: none;
 			}
-			ul.radio > li {
+			ul.radio > span {
 				visibility: hidden;
 			}
 		</style>
 		<script>
 			function genColorRadio(colorname) {
-				return `<li style="visibility:visible;"><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
+				return `<li><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
 			}
 			document.addEventListener('DOMContentLoaded', () => {
 				const acr = document.getElementById('act_color_radio');
-				const acrObj = [...acr.childNodes].filter(node => node.tagName === 'LI').map(node => node.innerText);
+				const acrObj = [...acr.childNodes].filter(node => node.tagName === 'SPAN').map(node => node.innerText);
 				acr.innerHTML = acrObj.map(genColorRadio).join('');
 			});
 
@@ -47,12 +47,12 @@
 		<form method="GET" action="#">
 			<ul class="radio" id="act_color_radio">
 				<p>Loading...</p>
-				<li>lightgreen</li>
-				<li>lightblue</li>
-				<li>lightsalmon</li>
-				<li>beige</li>
-				<li>cornsilk</li>
-				<li>lavender</li>
+				<span>lightgreen</span>
+				<span>lightblue</span>
+				<span>lightsalmon</span>
+				<span>beige</span>
+				<span>cornsilk</span>
+				<span>lavender</span>
 			</ul>
 			<input type="submit" />
 		</form>

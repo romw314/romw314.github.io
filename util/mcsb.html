@@ -18,7 +18,7 @@
 		</style>
 		<script>
 			function genColorRadio(colorname) {
-				return `<li><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
+				return `<li style="visibility:visible;"><input type="radio" id="color_${colorname}" name="color" value="${colorname}" /><label for="color_"><code>${colorname}</code></label></li>`;
 			}
 			document.addEventListener('DOMContentLoaded', () => {
 				const acr = document.getElementById('act_color_radio');

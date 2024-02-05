@@ -43,6 +43,8 @@ href="${search.href}">${search.text}</a></strong></p>
 			document.addEventListener('DOMContentLoaded', () => {
 				const resultNode = document.getElementById('result');
 				resultNode.innerText = getRawResult(new URLSearchParams(window.location.search));
+				navigator.clipboard.writeText(resultNode.innerText);
+				window.alert('Copied!');
 			});
 		</script>
 	</head>

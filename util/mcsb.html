@@ -33,7 +33,11 @@
 				return `\
 <!-- Start romw314 MCSb block
      https://romw314.github.io/util/mcsb.html -->
-<p style="background-color: lightgreen; border: 3px solid black; border-radius: 5px; color: #220022; padding: 5px;"><strong><a onmouseenter="window._romw314mscbtext=this.innerHTML;this.innerHTML=window._romw314mscbtext+' [<a href="https://romw314.github.io">romw314</a>]';" onmouseleave="this.innerHTML=window._romw314mcsbtext;" style="text-decoration: inherit; color: inherit;" href="${search.href}">${search.text}</a></strong></p>
+<p style="background-color: lightgreen; border: 3px solid black; border-radius: 5px; color: #220022; padding: 5px;">
+<strong><a
+onmouseenter="window._romw314mscbtext=this.innerHTML;this.innerHTML=window._romw314mscbtext+' [<a href="https://romw314.github.io">romw314</a>]';"
+onmouseleave="this.innerHTML=window._romw314mcsbtext;" style="text-decoration: inherit; color: inherit;"
+href="${search.href}">${search.text}</a></strong></p>
 <!-- End romw314 MCSb block -->`;
 			}
 			document.addEventListener('DOMContentLoaded', () => {
@@ -46,6 +50,8 @@
 		<h1><span style="text-decoration:underline;text-decoration-style:dotted;text-decoration-color:lightgray;" onmouseenter="this.innerText='My Colored Start button';" onmouseleave="this.innerText='MCSb'">MCSb</span> - Create your own start buttons</h1>
 		<h2>Choose your color</h2>
 		<form method="GET" action="#">
+			<label for="act_text">Button text:</label><input type="text" id="act_text" name="text" placeholder="Visit romw314!" />
+			<label for="act_href">Link URL:</label><input type="text" id="act_href" name="href" placeholder="https://romw314.github.io" />
 			<ul class="radio" id="act_color_radio">
 				<p>Loading...</p>
 			</ul>

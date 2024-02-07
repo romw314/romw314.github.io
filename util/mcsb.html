@@ -42,13 +42,15 @@ href="${search.get('href')}">${search.get('text')}</a></strong></p>
 			}
 			document.addEventListener('DOMContentLoaded', () => {
 				const resultNode = document.getElementById('result');
+				const resultHTMLNode = document.getElementById('reshtml');
 				try {
 					resultNode.innerText = getRawResult(new URLSearchParams(window.location.search));
+					resultHTMLNode.innerHTML = resultNode.innerText;
+					navigator.clipboard.writeText(resultNode.innerText);
+					window.alert('Copied!');
 				} catch (e) {
 					resultNode.innerText = e.message;
 				}
-				navigator.clipboard.writeText(resultNode.innerText);
-				window.alert('Copied!');
 			});
 		</script>
 	</head>
@@ -67,5 +69,7 @@ href="${search.get('href')}">${search.get('text')}</a></strong></p>
 		<pre><code id="result">
 			Please wait...
 		</code></pre>
+		<h2>See how it works</h2>
+		<div id="reshtml">No result.</div>
 	</body>
 </html>

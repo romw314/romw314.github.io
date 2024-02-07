@@ -29,7 +29,7 @@
 
 			function getRawResult(search) {
 				if (!search.has('color'))
-					return 'Sorry, but we can\'t find your color. Try choosing the color above and clicking SUBMIT.';
+					throw new Error('Sorry, but we can\'t find your color. Try choosing the color above and clicking SUBMIT.');
 				return `\
 <!-- Start romw314 MCSb block
      https://romw314.github.io/util/mcsb.html -->
@@ -37,12 +37,16 @@
 <strong><a
 onmouseenter="window._romw314mscbtext=this.innerHTML;this.innerHTML=window._romw314mscbtext+' [<a href="https://romw314.github.io">romw314</a>]';"
 onmouseleave="this.innerHTML=window._romw314mcsbtext;" style="text-decoration: inherit; color: inherit;"
-href="${search.href}">${search.text}</a></strong></p>
+href="${search.get('href')}">${search.get('text')}</a></strong></p>
 <!-- End romw314 MCSb block -->`;
 			}
 			document.addEventListener('DOMContentLoaded', () => {
 				const resultNode = document.getElementById('result');
-				resultNode.innerText = getRawResult(new URLSearchParams(window.location.search));
+				try {
+					resultNode.innerText = getRawResult(new URLSearchParams(window.location.search));
+				} catch (e) {
+					resultNode.innerText = e.message;
+				}
 				navigator.clipboard.writeText(resultNode.innerText);
 				window.alert('Copied!');
 			});
@@ -52,7 +56,7 @@ href="${search.href}">${search.text}</a></strong></p>
 		<h1><span style="text-decoration:underline;text-decoration-style:dotted;text-decoration-color:lightgray;" onmouseenter="this.innerText='My Colored Start button';" onmouseleave="this.innerText='MCSb'">MCSb</span> - Create your own start buttons</h1>
 		<h2>Choose your color</h2>
 		<form method="GET" action="#">
-			<label for="act_text">Button text:</label><input type="text" id="act_text" name="text" placeholder="Visit romw314!" />
+			<label for="act_text">Button text:</label><input type="text" id="act_text" name="text" placeholder="That's amazing!" />
 			<label for="act_href">Link URL:</label><input type="text" id="act_href" name="href" placeholder="https://romw314.github.io" />
 			<ul class="radio" id="act_color_radio">
 				<p>Loading...</p>

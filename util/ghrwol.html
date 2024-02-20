@@ -18,9 +18,9 @@
 			const username = new URLSearchParams(window.location.search).get('username');
 			if (username)
 				octokit.repos.listForUser({ username, visibility: "public" }).then(({ data }) => {
-					const reposWithoutLicense = data.filter((repo) => !repo.license);
+					const reposWithoutLicense = data.filter((repo) => !repo.license || !repo.has_readme);
 					document.getElementById('result').innerHTML = (reposWithoutLicense.length > 0) ?
-						reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a></li>`).join("") :
+						reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a>&nbsp;license=${repo.license},readme=${repo.has_readme}</li>`).join("") :
 						'<li><em>No public repos without a license. Great!</em></li>';
 				});
 			else

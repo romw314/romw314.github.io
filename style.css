@@ -11,11 +11,11 @@ body {
 
 @font-face {
 	font-family: brick22;
-	src: url(font.woff);
+	src: url(https://h10.ngw1.rf.gd/brick22.woff);
 }
 
 a {
-	color: red;
+	color: orange;
 }
 
 div.container {

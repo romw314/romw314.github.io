@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<h1>GhRWoL - license your repos</h1>
-		<p>GhRWoL helps you find public GitHub repos that don't have a license yet. This tool helps you to license your projects.</p>
+		<p>GhRWoL helps you find public GitHub repos that don't have a license yet, or don't have a <code>README</code>. This tool helps you to license your projects.</p>
 		<form action="#" method="GET">
 			<label for="username">Username:</label><input type="text" id="username" name="username" />
 			<input type="submit" />
@@ -16,11 +16,21 @@
 			import { Octokit } from "https://esm.sh/@octokit/rest";
 			const octokit = new Octokit();
 			const username = new URLSearchParams(window.location.search).get('username');
+			const bs = val => val ? '<code style="color:darkgreen;">y</code>' : '<code style="color:red;">n</code>';
 			if (username)
-				octokit.repos.listForUser({ username, visibility: "public" }).then(({ data }) => {
-					const reposWithoutLicense = data.filter((repo) => !repo.license || !repo.has_readme);
+				const { data } = await octokit.repos.listForUser({ username, visibility: "public" })
+				Promise.all(data.map(async repo => {
+					const readmeFiles = await octokit.rest.repos.getContent({
+						owner: username,
+						repo: repo.name,
+						path: ''
+					});
+					const hasReadme = readmeFiles.data.some(file => file.name.toLowerCase().includes('readme'));
+					return { ...repo, hasReadme };
+				})).then(({ data }) => {
+					const reposWithoutLicense = data.filter((repo) => !repo.license || !repo.hasReadme);
 					document.getElementById('result').innerHTML = (reposWithoutLicense.length > 0) ?
-						reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a>&nbsp;license=${Boolean(repo.license)},readme=${repo.has_readme}</li>`).join("") :
+						reposWithoutLicense.map((repo) => `<li><a href="${repo.html_url}">${repo.full_name}</a>&nbsp;license=${bs(repo.license)},readme=${bs(repo.hasReadme)}</li>`).join("") :
 						'<li><em>No public repos without a license. Great!</em></li>';
 				});
 			else

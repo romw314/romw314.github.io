@@ -31,16 +31,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
       - name: Download external projects
         run: |
           curl -o wk.html https://gist.githubusercontent.com/romw314/7b90a7ff302e61794b080edec3bb6e8a/raw/1d9f62a1949e619e1e432ea73e6a91d369fcffe2/thewallkicks.html
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: '.'
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -49,6 +42,13 @@ jobs:
       - run: inject-html -f '**/*.html' --headStart "$DU"
         env:
           DU: ${{ secrets.DUHEADER }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

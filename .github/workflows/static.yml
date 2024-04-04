@@ -40,6 +40,7 @@ jobs:
           node-version: 12.x
       - run: npm i -g node-inject-html-cli
       - run: inject-html -f '**/*.html' --headStart "$DU"
+        if: false
         env:
           DU: ${{ secrets.DUHEADER }}
       - name: Setup Pages

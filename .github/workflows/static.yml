@@ -39,10 +39,9 @@ jobs:
         with:
           node-version: 12.x
       - run: npm i -g node-inject-html-cli
-      - run: inject-html -f '**/*.html' --headStart "$DU"
-        if: false
+      - run: inject-html -f '**/*.html' --headStart "$HEADER"
         env:
-          DU: ${{ secrets.DUHEADER }}
+          HEADER: ${{ secrets.HEADER }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

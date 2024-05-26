@@ -1,0 +1,15 @@
+{
+	"name": "romw314.github.io",
+	"version": "0.0.1",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"serve": "serve -p 8000 public"
+	},
+	"keywords": [],
+	"author": "romw314",
+	"license": "BSD-2-Clause",
+	"devDependencies": {
+		"serve": "^14.2.3"
+	}
+}

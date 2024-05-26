@@ -1,0 +1,42 @@
+news: # Sorted by date (newest first)
+  - $:
+      - true
+      - fire
+      - title: Two Digital Machines
+        html: >-
+          <p>The <strong>GDevelop BIG Game Jam #5 has ended!</strong></p>
+          <p>Check out my game - <a href="https://romw314.itch.io/two-digital-machines">Two Digital Machines</a>!<p>
+          <p><a target="_blank" href="https://archive.org/details/two-digital-machines-trailer-made-with-clipchamp"><button type="button" class="swal2-styled" style="display: inline-block; background-color: lightgreen;">Watch the trailer!</button></a></p>
+        icon: info
+        width: 64em
+  - $:
+      - false
+      - fire
+      - title: UNSTABLE
+        html: >-
+          <p>The theme of the <strong>GDevelop BIG Game Jam #4</strong> was <strong>ON/OFF</strong>.</p><p>The <strong>GDevelop BIG Game Jam #5</strong> was started and the theme is <strong>UNSTABLE</strong>!</p><p><a href="https://romw314.itch.io">Follow me on itch.io</a> and don\'t miss my submission to the <strong>GDevelop BIG Game Jam #5</strong>!</p>
+        icon: info
+        width: 64em
+  - $:
+      - false
+      - fire
+      - title: 'GDevelop BIG Game Jam #5'
+        html: >-
+          <p><a href="https://romw314.itch.io/the-maze-box">The maze box</a> was my submission to the <strong>GDevelop BIG Game Jam #4</strong>. It has been played more than 400 times!</p><p>The <strong>GDevelop BIG Game Jam #5</strong> is upcoming!</p><p><a href="https://romw314.itch.io">Follow me on itch.io</a> and don't miss my submission to the <strong>GDevelop BIG Game Jam #5</strong>!</p>
+        icon: info
+        width: 64em
+  - $:
+      - false
+      - fire
+      - title: Pay and Wash
+        html: >-
+          <p>Pay and Wash is now released!</p><p><a href="http://megagaming.vercel.app" target="_blank" rel="noopener"><button type="button" class="swal2-styled" style="display: inline-block; background-color: lightgreen;">Learn More</button></a></p>
+        icon: info
+  - $:
+      - false
+      - fire
+      - title: RedGas - create websites without coding
+        html: >-
+          <p>GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!</p><p><a href="https://greenacidpipe.vercel.app" target="_blank">Learn More</a></p>
+        icon: info
+        width: 64em

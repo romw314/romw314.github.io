@@ -6,38 +6,23 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js" integrity="sha256-LkC+rZzbNkEleBllGdKANe5nxH0QnRjn4hbw2lW+Hjo=" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
 		<!-- End SweetAlert2 -->
-		<!-- Site news -->
-		<script>
-			window._romw314_news = [ // sorted by date (newest on top)
-				[true, 'fire', {
-					title: 'UNSTABLE',
-					html: '<p>The theme of the <strong>GDevelop BIG Game Jam #4</strong> was <strong>ON/OFF</strong>.</p><p>The <strong>GDevelop BIG Game Jam #5</strong> was started and the theme is <strong>UNSTABLE</strong>!</p><p><a href="https://romw314.itch.io">Follow me on itch.io</a> and don\'t miss my submission to the <strong>GDevelop BIG Game Jam #5</strong>!</p>',
-					icon: 'info',
-					width: '64em'
-				}],
-				[false, 'fire', {
-					title: 'GDevelop BIG Game Jam #5',
-					html: '<p><a href="https://romw314.itch.io/the-maze-box">The maze box</a> was my submission to the <strong>GDevelop BIG Game Jam #4</strong>. It has been played more than 400 times!</p><p>The <strong>GDevelop BIG Game Jam #5</strong> is upcoming!</p><p><a href="https://romw314.itch.io">Follow me on itch.io</a> and don\'t miss my submission to the <strong>GDevelop BIG Game Jam #5</strong>!</p>',
-					icon: 'info',
-					width: '64em'
-				}],
-				[false, 'fire', {
-					title: 'Pay and Wash',
-					html: '<p>Pay and Wash is now released!</p><p><a href="http://megagaming.vercel.app" target="_blank" rel="noopener"><button type="button" class="swal2-styled" style="display: inline-block; background-color: lightgreen;">Learn More</button></a></p>',
-					icon: 'info'
-				}],
-				[false, 'fire', {
-					title: 'RedGas - create websites without coding',
-					html: '<p>GreenAcidPipe v0.0.1 is now released!<br/>RedGas v0.0.9-2 is now released!</p><p><a href="https://greenacidpipe.vercel.app" target="_blank">Learn More</a></p>',
-					icon: 'info',
-					width: '64em'
-				}]
-			];
-		</script>
-		<!-- End Site news -->
+		<!-- JS-YAML -->
+		<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" integrity="sha256-Rdw90D3AegZwWiwpibjH9wkBPwS9U4bjJ51ORH8H69c=" crossorigin="anonymous"></script>
+		<!-- End JS-YAML -->
 		<script>
 			window.addEventListener('load', () => document.documentElement.requestFullscreen());
 			window.addEventListener('load', async () => {
+				const res = await fetch('/data/news.yaml');
+				try {
+					window._romw314_news = jsyaml.load(await res.text()).news.map(obj => obj.$);
+				}
+				catch (e) {
+					if (e.name === 'YAMLException')
+						console.error(e.message);
+					else
+						throw e;
+					return;
+				}
 				for (const n of window._romw314_news)
 					if (n[0] === true)
 						await Swal[n[1]](...n.slice(2));

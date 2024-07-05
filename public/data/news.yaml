@@ -1,4 +1,13 @@
 news: # Sorted by date (newest first)
+  -  $:
+      - true
+      - fire
+      - title: System Emulator
+        html: >-
+          <p>System Emulator is my new work-in-progress game!<p>
+          <p><a target="_blank" href="https://www.veoh.com/videos/v1423425833XCHXmya"><button type="button" class="swal2-styled" style="display: inline-block; background-color: lightgreen;">Watch the trailer!</button></a></p>
+        icon: info
+        width: 64em
   - $:
       - true
       - fire

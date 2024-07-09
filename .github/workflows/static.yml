@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          lfs: 'true'
       - name: Download external projects
         run: |
           curl -o wk.html https://gist.githubusercontent.com/romw314/7b90a7ff302e61794b080edec3bb6e8a/raw/1d9f62a1949e619e1e432ea73e6a91d369fcffe2/thewallkicks.html

@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>romw314</title>
+		<link rel="stylesheet" href="style.css"/>
+		<!-- SweetAlert2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js" integrity="sha256-LkC+rZzbNkEleBllGdKANe5nxH0QnRjn4hbw2lW+Hjo=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
+		<!-- End SweetAlert2 -->
+		<!-- JS-YAML -->
+		<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" integrity="sha256-Rdw90D3AegZwWiwpibjH9wkBPwS9U4bjJ51ORH8H69c=" crossorigin="anonymous"></script>
+		<!-- End JS-YAML -->
+		<script>
+			window.addEventListener('load', () => document.documentElement.requestFullscreen());
+			window.addEventListener('load', async () => {
+				const res = await fetch('/data/news.yaml');
+				try {
+					window._romw314_news = jsyaml.load(await res.text()).news.map(obj => obj.$);
+				}
+				catch (e) {
+					if (e.name === 'YAMLException')
+						console.error(e.message);
+					else
+						throw e;
+					return;
+				}
+				for (const n of window._romw314_news)
+					if (n[0] === true)
+						await Swal[n[1]](...n.slice(2));
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<meta charset="UTF-8">
+				<h1 style='text-align: center;'>romw314</h1>
+				<div style='display: inline-block; position: relative; width: auto; left: 50%; transform: translateX(-50%);'>
+					<ul>
+						<li>My projects<ul>
+							<li>Games<ul>
+								<li><a href="https://romw314.itch.io/the-maze-box">The maze box</a></li>
+								<li><a href="https://chess-no-25.vercel.app">Chess No. 25</a></li>
+							</ul></li>
+							<li>Fonts<ul>
+								<li><a href="https://fontstruct.com/fontstructions/show/2321572/rettel-1">The "retteL" font</a></li>
+								<li><a href="https://fontstruct.com/fontstructions/show/2420072/brick22">The "Brick22" font</a></li>
+							</ul></li>
+							<li><a href="https://greenacidpipe.vercel.app">GreenAcidPipe/RedGas (no-code website maker)</a></li>
+							<li><a href="https://romw314.gitlab.io/turbowarp-extensions">My set of extensions for TurboWarp</a></li>
+						</ul></li>
+						<li>I collaborated on<ul>
+							<li><a href="https://pay-and-wash.vercel.app">Pay and Wash</a></li>
+						</ul></li>
+						<li>My forks/mods of other projects<ul>
+							<li><a href="/pymariogame">PyMarioGame</a></li>
+						</ul></li>
+					</ul>
+				</div>
+				<p class="profiles" style='display: inline-block; position: relative; text-align: center; width: 100%;'>
+					<a href="https://github.com/romw314">GitHub</a>
+					<a href="https://gitlab.com/romw314">GitLab</a>
+					<span><a href="https://romw314.itch.io">itch.io</a></span> <!-- I wrap the last link inside a <span> so the CSS will not add any pipe after this link. -->
+				</p>
+			</meta>
+		</div>
+	</body>
+<html>

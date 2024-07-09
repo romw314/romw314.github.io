@@ -1,43 +1,170 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>romw314</title>
-		<link rel="stylesheet" href="style.css"/>
-		<!-- SweetAlert2 -->
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js" integrity="sha256-LkC+rZzbNkEleBllGdKANe5nxH0QnRjn4hbw2lW+Hjo=" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
-		<!-- End SweetAlert2 -->
-		<!-- JS-YAML -->
-		<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" integrity="sha256-Rdw90D3AegZwWiwpibjH9wkBPwS9U4bjJ51ORH8H69c=" crossorigin="anonymous"></script>
-		<!-- End JS-YAML -->
+		<title>Romw314</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Courgette&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 		<script>
-			window.addEventListener('load', () => document.documentElement.requestFullscreen());
-			window.addEventListener('load', async () => {
-				const res = await fetch('/data/news.yaml');
-				try {
-					window._romw314_news = jsyaml.load(await res.text()).news.map(obj => obj.$);
-				}
-				catch (e) {
-					if (e.name === 'YAMLException')
-						console.error(e.message);
-					else
-						throw e;
-					return;
-				}
-				for (const n of window._romw314_news)
-					if (n[0] === true)
-						await Swal[n[1]](...n.slice(2));
+			const storeScroll = () => {
+				document.documentElement.dataset.scroll = window.scrollY
+				window.requestAnimationFrame(storeScroll);
+			};
+			storeScroll();
+			document.addEventListener('DOMContentLoaded', () => {
+				const playSvg = '<svg xmlns="http://www.w3.org/2000/svg" style="scale:2;padding:0 24px 0 10px;" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>';
+				document.querySelectorAll('button.play').forEach(btn => {
+					btn.innerHTML = playSvg + btn.innerHTML;
+					if (btn.classList.contains('stay'))
+						btn.addEventListener('click', () => btn.dataset.clicked = '1');
+				});
+				const trailerButton = document.querySelector('#playTrailer');
+				const trailer = document.querySelector('#trailer');
+				trailerButton.addEventListener('click', () => {
+					trailer.showModal();
+				});
 			});
 		</script>
+		<style>
+			body {
+				text-align: center;
+				background-color: midnightblue;
+				color: greenyellow;
+				font-family: "Courgette", "Courier New", "Roboto", serif;
+				font-size: 1.7rem;
+			}
+			.headerContainer {
+				position: absolute;
+				height: 100%;
+				left: 0;
+				right: 0;
+				width: auto;
+				background: url(/data/gi0000_system_emulator.gif) no-repeat center;
+				background-size: contain;
+				transition: opacity 500ms ease-in-out;
+			}
+			html:not([data-scroll='0']) .headerContainer {
+				opacity: 0;
+			}
+			.header {
+				position: relative;
+				width: max-content;
+				height: auto;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: midnightblue;
+				opacity: 0.75;
+				padding: 2em;
+				border: 10px solid black;
+			}
+			.header h1 {
+				font-family: "Pixelify Sans", "Cougrette", "Courier New", "Roboto", serif;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				display: inline-block;
+				margin-bottom: 75px;
+				width: auto;
+			}
+			.container {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				width: auto;
+			}
+			.content {
+				margin: 18em 0 4em 0;
+				position: relative;
+				left: 50%;
+				transform: translateX(-50%);
+				width: auto;
+			}
+			.content .ulContainer {
+				position: relative;
+				display: flex;
+				flex-direction: row;
+			}
+			.content ul {
+				position: relative;
+				text-align: left;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			a {
+				color: lightblue;
+			}
+			footer {
+				font-size: 0.8rem;
+				background-color: mediumblue;
+				left: 0;
+				right: 0;
+				widtH: auto;
+				padding: 2rem;
+			}
+			button.play {
+				padding: 1rem;
+				margin: 1rem;
+				font-size: 2rem;
+				font-family: "Courier New", monospace;
+				background-color: magenta;
+				color: black;
+				text-decoration: none;
+				transition: 250ms ease-in-out;
+				border-width: 8px;
+				border-style: groove;
+				border-color: magenta;
+				border-radius: 20px;
+				text-transform: uppercase;
+			}
+			button.play:hover {
+				background-color: rgb(231, 95, 231);
+			}
+			button.play:active, button.play[data-clicked='1'], a:active button.play {
+				background-color: darkmagenta;
+			}
+			::backdrop {
+				background-image: linear-gradient(
+					45deg,
+					magenta,
+					rebeccapurple,
+					dodgerblue,
+					green
+				);
+				opacity: 0.75;
+			}
+		</style>
 	</head>
 	<body>
+		<div class="headerContainer">
+			<div class="header">
+				<h1>System Emulator!</h1>
+				<p>System Emulator is my new work-in-progress game!</p>
+				<p>The first release is planned in September 2024!</p>
+				<button class="play" id="playTrailer">Watch the trailer!</button>
+				<dialog id="trailer">
+					<iframe src="https://archive.org/embed/system-emulator-trailer" width="854" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+					<form method="dialog">
+						<button type="submit">Close</button>
+					</form>
+				</dialog>
+			</div>
+		</div>
 		<div class="container">
-			<meta charset="UTF-8">
-				<h1 style='text-align: center;'>romw314</h1>
-				<div style='display: inline-block; position: relative; width: auto; left: 50%; transform: translateX(-50%);'>
+			<div class="content">
+				<h1>Two Digital Machines</h1>
+				<p>The GDevelop BIG Game Jam #5 is over.</p>
+				<p>My submission was Two Digital Machines!</p>
+				<a href="https://romw314.itch.io/two-digital-machines"><button class="play stay">Play now!</button></a>
+			</div>
+			<div class="content">
+				<h1>Romw314</h1>
+				<div class="ulContainer">
 					<ul>
 						<li>My projects<ul>
 							<li>Games<ul>
 								<li><a href="https://romw314.itch.io/the-maze-box">The maze box</a></li>
+								<li><a href="https://romw314.itch.io/two-digital-machines">Two digital machines</a></li>
 								<li><a href="https://chess-no-25.vercel.app">Chess No. 25</a></li>
 							</ul></li>
 							<li>Fonts<ul>
@@ -55,12 +182,10 @@
 						</ul></li>
 					</ul>
 				</div>
-				<p class="profiles" style='display: inline-block; position: relative; text-align: center; width: 100%;'>
-					<a href="https://github.com/romw314">GitHub</a>
-					<a href="https://gitlab.com/romw314">GitLab</a>
-					<span><a href="https://romw314.itch.io">itch.io</a></span> <!-- I wrap the last link inside a <span> so the CSS will not add any pipe after this link. -->
-				</p>
-			</meta>
+			</div>
+			<footer>
+				<p>The "Courgette", "Roboto", and "Pixelity Sans" fonts and the "Play Circle" icon are from Google Fonts. Refer to <a href="http://fonts.google.com">fonts.google.com</a> for more information.</a></p>
+			</footer>
 		</div>
 	</body>
-<html>
+</html>

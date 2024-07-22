@@ -13,16 +13,22 @@
 			storeScroll();
 			document.addEventListener('DOMContentLoaded', () => {
 				const playSvg = '<svg xmlns="http://www.w3.org/2000/svg" style="scale:2;padding:0 24px 0 10px;" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>';
-				document.querySelectorAll('button.play').forEach(btn => {
-					btn.innerHTML = playSvg + btn.innerHTML;
+				document.querySelectorAll('button, .button').forEach(btn => {
+					if (btn.classList.contains('play'))
+						btn.innerHTML = playSvg + btn.innerHTML;
 					if (btn.classList.contains('stay'))
 						btn.addEventListener('click', () => btn.dataset.clicked = '1');
+					if (btn.classList.contains('detect-click')) {
+						btn.addEventListener('pointerdown', () => btn.dataset.clicked = '1');
+						btn.addEventListener('pointerup', () => btn.dataset.clicked = '0');
+					}
 				});
 				const trailerButton = document.querySelector('#playTrailer');
 				const trailer = document.querySelector('#trailer');
 				trailerButton.addEventListener('click', () => {
 					trailer.showModal();
 				});
+				setTimeout(() => document.body.dataset.loaded = '1', 3000); // wait a bit to show the page after everything is loaded
 			});
 		</script>
 		<style>
@@ -32,6 +38,54 @@
 				color: greenyellow;
 				font-family: "Courgette", "Courier New", "Roboto", serif;
 				font-size: 1.7rem;
+			}
+			body[data-loaded='0'] {
+				background: pink;
+			}
+			body[data-loaded='0'] * {
+				content-visibility: hidden;
+				background: none;
+			}
+			body[data-loaded='0']::after {
+				position: absolute;
+				left: 0;
+				top: 0;
+				content: url(/fallback.svg);
+			}
+			.banner {
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				width: auto;
+				padding: 0;
+				z-index: 64;
+				background-color: mediumblue;
+			}
+			.banner > input {
+				display: none;
+			}
+			.banner > input ~ * {
+				display: none;
+			}
+			.banner > input:checked ~ * {
+				display: initial;
+			}
+			.bannerContent {
+				padding: 30px;
+				text-align: left;
+				position: relative;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: auto;
+				height: auto;
+				z-index: 64;
+			}
+			.bannerContent * {
+				user-select: none;
+				position: static;
 			}
 			.headerContainer {
 				position: absolute;
@@ -68,10 +122,11 @@
 			}
 			.container {
 				position: absolute;
-				top: 100%;
+				top: 20%;
 				left: 0;
 				right: 0;
 				width: auto;
+				z-index: -1;
 			}
 			.content {
 				margin: 18em 0 4em 0;
@@ -102,10 +157,7 @@
 				widtH: auto;
 				padding: 2rem;
 			}
-			button.play {
-				padding: 1rem;
-				margin: 1rem;
-				font-size: 2rem;
+			button, .button {
 				font-family: "Courier New", monospace;
 				background-color: magenta;
 				color: black;
@@ -116,12 +168,21 @@
 				border-color: magenta;
 				border-radius: 20px;
 				text-transform: uppercase;
+				cursor: pointer;
 			}
-			button.play:hover {
+			button.play {
+				padding: 1rem;
+				margin: 1rem;
+				font-size: 2rem;
+			}
+			button:hover, .button:hover {
 				background-color: rgb(231, 95, 231);
 			}
-			button.play:active, button.play[data-clicked='1'], a:active button.play {
-				background-color: darkmagenta;
+			button:active, .button:active
+			button[data-clicked='1'], .button[data-clicked='1'],
+			a:active button.play {
+				cursor: grabbing !important;
+				background-color: darkmagenta !important;
 			}
 			::backdrop {
 				background-image: linear-gradient(
@@ -135,7 +196,17 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body data-loaded="0">
+		<div class="banner">
+			<input type="checkbox" id="bannerOpen" checked>
+			<div class="bannerContent">
+				<p>Give me feedback about my games and help me make them even better.</p>
+				<p>
+					<a class="button detect-click" href="http://romw314.66ghz.com/forms/modules/form_builder/published/game_feedback.php">Start now!</a>
+					<label for="bannerOpen" class="button detect-click">Close</label>
+				</p>
+			</div>
+		</div>
 		<div class="headerContainer">
 			<div class="header">
 				<h1>System Emulator!</h1>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="240">
+	<text x="5" y="30" fill="none" stroke="red" font-size="35">Loading page, please be patient.</text>
+	<text x="5" y="80" fill="none" stroke="green" font-size="30">If the page doesn't load after 5 seconds use one of these browsers:</text>
+	<circle cx="20" cy="110" r="8" />
+	<circle cx="20" cy="145" r="8" />
+	<circle cx="20" cy="180" r="8" />
+	<circle cx="20" cy="215" r="8" />
+	<a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">
+		<text x="35" y="120" fill="none" stroke="blue" font-size="30">Mozilla Firefox</text>
+	</a>
+	<a href="https://www.google.com/chrome/" target="_blank">
+		<text x="35" y="155" fill="none" stroke="blue" font-size="30">Google Chrome <tspan stroke="midnightblue">(recommended)</tspan></text>
+	</a>
+	<a href="https://www.microsoft.com/en-us/edge" target="_blank">
+		<text x="35" y="190" fill="none" stroke="blue" font-size="30">Microsoft Edge</text>
+	</a>
+	<a href="https://www.opera.com/browsers/opera" target="_blank">
+		<text x="35" y="225" fill="none" stroke="blue" font-size="30">Opera Browser</text>
+	</a>
+</svg>
